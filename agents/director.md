@@ -50,6 +50,7 @@ tools: [Read, Edit, Glob, Grep, Agent]
 - **다음 Phase 진행**: tdd-cycle-checker "Phase N 완료" 보고 + 커밋 확인
 - **중단**: 동일 Step FAIL 2회 이상 → 사용자 보고 후 대기
 - **PLAN.md 업데이트**: Phase 완료 시 `[ ]` → `[x]` 직접 수정
+- **최종 Phase 완료 시**: `git-manager`에게 `temp/` 폴더 git 제거 지시 (로컬 파일 유지, git 추적만 해제)
 
 ## 상태 보고 형식
 ```
