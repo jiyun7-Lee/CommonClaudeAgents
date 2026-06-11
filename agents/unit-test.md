@@ -34,6 +34,13 @@ tools: [Read, Write, Edit, Glob, Grep]
 
 ## 보고 형식
 ```
+[STEP_RESULT]
+phase: N / step: ① / agent: unit-test
+status: completed | failed
+keyword: [UT 작성 완료]
+files: <경로>/<파일명>Test.cpp
+summary: N개 케이스 작성 (FAIL N / PASS N)
+
 [UT 작성 완료]
 생성 파일: <경로>/<파일명>Test.cpp
 작성된 케이스: N개 (FAIL N개 / PASS N개)

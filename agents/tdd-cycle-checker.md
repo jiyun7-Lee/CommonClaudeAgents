@@ -19,10 +19,54 @@ Director 지시를 받아 아래 순서로 에이전트를 위임하고, 각 단
 | ③ | `feature` / `refactoring` / `clean-code` | 구현 또는 개선 | Step 코드 변경 완료 확인 |
 | ③- | `docs-writer` | FEATURE_LIST.md 해당 컬럼 ✅ 갱신 | 완료 날짜 기록 확인 |
 | ④ | `clean-code` | SOLID 검토 및 레거시 패턴 점검 | "검토 완료" 또는 수정 완료 확인 |
+
+> **병렬 실행**: ③ 완료 후 `③-docs-writer`와 `④clean-code`를 **동시 실행**한다. 둘 다 완료된 후 ⑤로 진행한다.
 | ⑤ | `tester` | 전체 테스트 빌드 및 실행 | 모든 케이스 PASS 확인 |
 | ⑥ | `coverage` | 라인 커버리지 측정 (90% 게이트) — **Phase 마지막 Step에서만 실행** | PASS → ⑦ 진행 / BLOCK → ⑥ BLOCK 분기 처리 후 ⑤ 재실행 |
 | ⑦ | `git-manager` | `[feat]` / `[refactor]` 커밋 | 커밋 해시 반환 확인 |
 | ⑦- | `docs-writer` | CHANGELOG 갱신, TEST_LIST ✅ PASS 반영 | 항목 추가 확인 |
+
+## 구조화된 단계 보고 (STEP_RESULT)
+모든 하위 에이전트는 완료 보고 시 아래 블록을 반드시 포함한다.  
+tdd-cycle-checker는 이 블록을 파싱해 `temp/phase{N}_progress.md`를 갱신한다.
+
+```
+[STEP_RESULT]
+phase: N / step: ① | ③ | ④ / agent: <에이전트명>
+status: completed | failed
+keyword: [UT 작성 완료] | [GREEN 달성] | [REFACTOR 완료] | [CLEAN 완료]
+files: <변경·생성 파일 목록>
+summary: <한 줄 요약>
+```
+
+## 체크포인트 — 재개 지원
+
+### Phase 시작 시
+`temp/phase{N}_progress.md`가 없으면 아래 형식으로 신규 생성한다.
+
+```markdown
+# Phase N Progress
+started: YYYY-MM-DD HH:MM | status: in_progress
+
+| 단계 | 에이전트 | 상태 | 완료 시각 | 비고 |
+|---|---|---|---|---|
+| ① | unit-test | ⬜ | — | — |
+| ①- | docs-writer | ⬜ | — | — |
+| ② | git-manager | ⬜ | — | — |
+| ③ | (에이전트명) | ⬜ | — | — |
+| ③- | docs-writer | ⬜ | — | — |
+| ④ | clean-code | ⬜ | — | — |
+| ⑤ | tester | ⬜ | — | — |
+| ⑥ | coverage | ⬜ | — | — |
+| ⑦ | git-manager | ⬜ | — | — |
+| ⑦- | docs-writer | ⬜ | — | — |
+```
+
+### 단계 완료 시
+`[STEP_RESULT]` 수신 → 해당 행 상태를 `✅`로, 완료 시각과 비고를 기록한다.
+
+### Phase 재개 시
+`temp/phase{N}_progress.md`를 Read하여 `✅` 완료 단계는 건너뛰고 첫 번째 `⬜` 단계부터 재시작한다.
 
 ## ③ 담당 에이전트 선택
 | 상황 | 담당 |
