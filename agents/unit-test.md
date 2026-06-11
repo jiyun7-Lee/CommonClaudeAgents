@@ -35,7 +35,9 @@ tools: [Read, Write, Edit, Glob, Grep]
 ## 보고 형식
 ```
 [STEP_RESULT]
-phase: N / step: ① / agent: unit-test
+phase: N
+step: ①
+agent: unit-test
 status: completed | failed
 keyword: [UT 작성 완료]
 files: <경로>/<파일명>Test.cpp

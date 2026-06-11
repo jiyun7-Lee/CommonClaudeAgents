@@ -43,7 +43,9 @@ RED 상태 테스트를 통과시키는 **최소한의** 프로덕션 코드를 
 ## 보고 형식
 ```
 [STEP_RESULT]
-phase: N / step: ③ / agent: feature
+phase: N
+step: ③
+agent: feature
 status: completed | failed
 keyword: [GREEN 달성]
 files: <구현 파일 목록>
