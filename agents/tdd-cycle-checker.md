@@ -15,7 +15,7 @@ Director 지시를 받아 아래 순서로 에이전트를 위임하고, 각 단
 |---|---|---|---|
 | ① | `unit-test` | Phase 대상 테스트 작성 (RED) | 테스트 파일 생성 및 TEST( 매크로 존재 확인 |
 | ①- | `docs-writer` | TEST_LIST.md 신규 케이스 추가 (상태: ⬜) | 항목 추가 확인 |
-| ② | `git-manager` | `[unitTest]` 커밋 | 커밋 해시 반환 확인 |
+| ② | `git-manager` | `[unitTest]` 커밋 | **사용자 confirm 후** 커밋 해시 반환 확인 |
 | ③ | `feature` / `refactoring` / `clean-code` | 구현 또는 개선 | Step 코드 변경 완료 확인 |
 | ③- | `docs-writer` | FEATURE_LIST.md 해당 컬럼 ✅ 갱신 | 완료 날짜 기록 확인 |
 | ④ | `clean-code` | SOLID 검토 및 레거시 패턴 점검 | "검토 완료" 또는 수정 완료 확인 |
@@ -23,7 +23,7 @@ Director 지시를 받아 아래 순서로 에이전트를 위임하고, 각 단
 > **병렬 실행**: ③ 완료 후 `③-docs-writer`와 `④clean-code`를 **동시 실행**한다. 둘 다 완료된 후 ⑤로 진행한다.
 | ⑤ | `tester` | 전체 테스트 빌드 및 실행 | 모든 케이스 PASS 확인 |
 | ⑥ | `coverage` | 라인 커버리지 측정 (90% 게이트) — **Phase 마지막 Step에서만 실행** | PASS → ⑦ 진행 / BLOCK → ⑥ BLOCK 분기 처리 후 ⑤ 재실행 |
-| ⑦ | `git-manager` | `[feat]` / `[refactor]` 커밋 | 커밋 해시 반환 확인 |
+| ⑦ | `git-manager` | `[feat]` / `[refactor]` 커밋 | **사용자 confirm 후** 커밋 해시 반환 확인 |
 | ⑦- | `docs-writer` | CHANGELOG 갱신, TEST_LIST ✅ PASS 반영 | 항목 추가 확인 |
 
 ## 구조화된 단계 보고 (STEP_RESULT)
