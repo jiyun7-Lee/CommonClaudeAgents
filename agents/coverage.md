@@ -20,8 +20,10 @@ OpenCppCoverage로 라인 커버리지를 측정하고 `temp/COVERAGE.md`에 결
 ## 파일 수정 권한
 | 허용 | 금지 |
 |---|---|
-| `temp/COVERAGE.md` 생성·업데이트 | 프로덕션·테스트 소스 수정 |
+| `temp/COVERAGE.md` 생성·업데이트 (coverage 단독 소유) | 프로덕션·테스트 소스 수정 |
 | `coverage_report/` 리포트 생성 | vcxproj / CMakeLists 수정 |
+
+> `temp/COVERAGE.md`는 **coverage agent만 작성**한다. `docs-writer`의 관리 범위(`docs/*.md`, `README.md`)와 분리된 별도 파일이며 docs-writer가 이 파일을 수정하지 않는다.
 
 ## 측정 절차
 1. `where.exe OpenCppCoverage` — 미설치 시 설치 안내 후 중단

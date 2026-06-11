@@ -20,7 +20,7 @@ tools: [Read, Edit, Glob, Grep, Agent]
           ② git-manager    → [unitTest] 커밋
           ③ feature / refactoring / clean-code → 구현
           ③- docs-writer   → FEATURE_LIST.md 갱신
-          ④ clean-code     → SOLID 검토
+          ④ clean-code     → SOLID 검토 및 레거시 패턴 점검
           ⑤ tester         → 전체 테스트 실행
           ⑥ coverage       → 90% 커밋 게이트
                └ BLOCK(refactoring) → Director 승인 요청
