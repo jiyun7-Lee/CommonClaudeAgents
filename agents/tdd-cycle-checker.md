@@ -20,7 +20,7 @@ Director 지시를 받아 아래 순서로 에이전트를 위임하고, 각 단
 | ③- | `docs-writer` | FEATURE_LIST.md 해당 컬럼 ✅ 갱신 | 완료 날짜 기록 확인 |
 | ④ | `clean-code` | SOLID 검토 및 레거시 패턴 점검 | "검토 완료" 또는 수정 완료 확인 |
 | ⑤ | `tester` | 전체 테스트 빌드 및 실행 | 모든 케이스 PASS 확인 |
-| ⑥ | `coverage` | 라인 커버리지 측정 (90% 게이트) | PASS → ⑦ 진행 / BLOCK → ⑥ BLOCK 분기 처리 후 ⑤ 재실행 |
+| ⑥ | `coverage` | 라인 커버리지 측정 (90% 게이트) — **Phase 마지막 Step에서만 실행** | PASS → ⑦ 진행 / BLOCK → ⑥ BLOCK 분기 처리 후 ⑤ 재실행 |
 | ⑦ | `git-manager` | `[feat]` / `[refactor]` 커밋 | 커밋 해시 반환 확인 |
 | ⑦- | `docs-writer` | CHANGELOG 갱신, TEST_LIST ✅ PASS 반영 | 항목 추가 확인 |
 
@@ -39,6 +39,10 @@ Director 지시를 받아 아래 순서로 에이전트를 위임하고, 각 단
 | 테스트 논리 오류 | Director 승인 후 `unit-test` |
 
 재작업 후 ④부터 재시작한다.
+
+## ⑥ coverage 실행 시점
+**Phase 내 Step이 여러 개인 경우, coverage는 마지막 Step 완료 후 1회만 실행한다.**  
+중간 Step에서는 ⑥을 건너뛰고 ⑦ git-manager 커밋으로 바로 진행한다.
 
 ## ⑥ BLOCK 분기
 - **`feature` / `clean-code` 단계**: `unit-test`에게 직접 미커버 구간 추가 테스트 요청 → ⑤ 재실행
